@@ -3,12 +3,12 @@ use yew_router::prelude::*;
 
 #[derive(Clone, Routable, PartialEq)]
 enum Route {
-    #[at("/")]
+    #[at("/yew-news")]
     Home,
-    #[at("/article/:id")]
+    #[at("/yew-news/article/:id")]
     Article { id: usize },
     #[not_found]
-    #[at("/404")]
+    #[at("/yew-news/404")]
     NotFound,
 }
 
