@@ -53,11 +53,11 @@ fn TemplateArticle(props: &TemplateArticleProps) -> Html {
     let articles = vec![
         article {
             title: "Rust".to_string(),
-            text: "hello".to_string(),
+            text: "毎日Rustをやっています".to_string(),
         },
         article {
             title: "hello".to_string(),
-            text: "hello".to_string(),
+            text: "レコードをたくさんゲットしました".to_string(),
         },
     ];
     match articles.get(props.id) {
