@@ -38,6 +38,7 @@ jobs:
         run: |
           CONTAINER_ID=`docker create yew-test:latest`
           docker cp $CONTAINER_ID:/app/dist dist
+          cp dist/index.html dist/404.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
