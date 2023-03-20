@@ -3,12 +3,21 @@ services:
   app:
     build:
       context: .
+      target: develop
       dockerfile: Dockerfile_dev
     volumes:
       - type: bind
-        source: "."
-        target: "/app"
-      - /app/target
+        source: "src"
+        target: "/app/src"
+      - type: bind
+        source: "Cargo.toml"
+        target: "/app/Cargo.toml"
+      - type: bind
+        source: "Cargo.lock"
+        target: "/app/Cargo.lock"
+      - type: bind
+        source: "index.html"
+        target: "/app/index.html"
     healthcheck:
       test: "curl -f http://localhost:8080"
       interval: 10s
@@ -17,4 +26,3 @@ services:
       start_period: 30s
     ports:
       - 8080:8080
-    tty: true

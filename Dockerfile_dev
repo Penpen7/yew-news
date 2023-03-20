@@ -1,5 +1,5 @@
-FROM rust:1.66.0-buster as chef
-RUN cargo install cargo-chef
+FROM rust:1.68 as chef
+RUN wget -qO- https://github.com/LukeMathWalker/cargo-chef/releases/download/v0.1.52/cargo-chef-x86_64-unknown-linux-musl.tar.gz | tar -xzf- && mv ./cargo-chef /usr/local/cargo/bin
 WORKDIR /app
 
 FROM chef as planner
@@ -10,11 +10,10 @@ FROM chef as cacher
 COPY --from=planner /app/recipe.json recipe.json
 RUN cargo chef cook --recipe-path recipe.json
 
-FROM rust:1.66.0-buster as develop
+FROM rust:1.68 as develop
 WORKDIR /app
 RUN rustup target add wasm32-unknown-unknown
-RUN rustup component add clippy rustfmt
-RUN wget -qO- https://github.com/thedodd/trunk/releases/download/v0.16.0/trunk-x86_64-unknown-linux-gnu.tar.gz | tar -xzf-
-RUN cargo install --locked cargo-watch wasm-bindgen-cli
+# RUN rustup component add clippy rustfmt
+RUN cargo install --locked trunk wasm-bindgen-cli
 COPY --from=cacher /app/target target
 CMD trunk serve --address 0.0.0.0 --port=8080
