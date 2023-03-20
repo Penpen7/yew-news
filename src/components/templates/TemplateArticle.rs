@@ -21,7 +21,7 @@ pub fn TemplateArticle(props: &TemplateArticleProps) -> Html {
                 <Header />
                 <ArticleTitle title={v.title.clone()} />
                 <ArticleText text={v.text.clone()} />
-                <GoodButton />
+                <GoodButton good_point={v.good_point} />
             </>
         },
         _ => html! {

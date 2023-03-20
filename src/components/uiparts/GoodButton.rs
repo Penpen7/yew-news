@@ -1,7 +1,13 @@
 use yew::prelude::*;
+
+#[derive(Properties, PartialEq, Clone)]
+pub struct GoodButtonProps {
+    pub good_point: usize,
+}
+
 #[function_component]
-pub fn GoodButton() -> Html {
-    let good = use_state(|| 0);
+pub fn GoodButton(props: &GoodButtonProps) -> Html {
+    let good = use_state(|| props.good_point);
     let on_good_button_click = {
         let good = good.clone();
         move |_| {
